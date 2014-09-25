@@ -8,12 +8,17 @@ import java.io.{ FileInputStream, File }
 import org.apache.pdfbox.pdmodel.{ PDDocument, PDPage }
 
 /**
- *
+ * PDF utility object
  */
 object PDFUtils {
 
   /**
+   *  It converts a pdf file into buffered images.
+   *  It fails when either file name or file path is invalid or pdf file is not in standard format.
    *
+   * @param filePath : Path for the pdf file which is to be converted
+   * @param fileName : Pdf file name which is to be converted
+   * @return : List of buffered images
    */
   def convertPdfToBufferedImage(filePath: String, fileName: String): Either[String, List[BufferedImage]] = {
 
