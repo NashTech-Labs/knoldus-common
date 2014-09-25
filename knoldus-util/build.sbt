@@ -1,12 +1,14 @@
 name := "knoldus-util"
 
-organization := "Knoldus"
+version := "1.0"
 
-scalaVersion := "2.10.2"
+organization := "com.knoldus"
+
+scalaVersion := "2.11.2"
 
 libraryDependencies ++= Seq("org.apache.pdfbox" % "pdfbox" % "1.8.4",
                             "org.apache.pdfbox" % "fontbox" % "1.8.4",
-                            "org.scalatest" %% 	"scalatest" % "1.9.2" % "test")
+                            "org.scalatest" %% 	"scalatest" % "2.2.2" % "test")
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
