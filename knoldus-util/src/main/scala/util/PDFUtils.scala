@@ -9,6 +9,8 @@ import org.apache.pdfbox.pdmodel.{ PDDocument, PDPage }
 
 /**
  * PDF utility object
+ * 
+ * @author Rishi Khandelwal
  */
 object PDFUtils {
 
