@@ -33,4 +33,17 @@ class CommonUtilsTest extends FunSuite {
     assert(CommonUtils.sortSubListByIndexes(input) === output)
   }
 
+  test("Filter a list of date using a genric compare method") {
+    val format = new java.text.SimpleDateFormat("dd-MM-yyyy")
+    val input = List(format.parse("21-03-2011"), format.parse("23-02-1911"), format.parse("21-04-2011"), format.parse("01-05-2011"))
+    val isFilter = CommonUtils.compare(format.parse("21-03-2011"), "gt")
+    assert((input filter (isFilter(_))) === List(format.parse("21-04-2011"), format.parse("01-05-2011")))
+  }
+
+  test("Filter a list of integer using a genric compare method") {
+    val input = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    val isFilter = CommonUtils.compare(5, "gt")
+    assert((input filter (isFilter(_))) === List(6, 7, 8, 9))
+  }
+
 }

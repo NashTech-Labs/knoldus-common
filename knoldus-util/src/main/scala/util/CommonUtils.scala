@@ -53,8 +53,50 @@ object CommonUtils {
    * @return List of sorted sub list by indexes
    */
 
-  def sortSubListByIndexes(elements: List[List[_]], indexes: List[Int]=Nil) = {
+  def sortSubListByIndexes(elements: List[List[_]], indexes: List[Int] = Nil) = {
     elements sortBy { element => (indexes map { element(_) }).mkString("") + element.mkString("") }
+  }
+
+  /**
+   * Compare Any Data Type Value
+   *
+   * Example:-
+   * scala> compare(5,"lt")
+   * res23: Int => Boolean = <function1>
+   *
+   * scala> val isLessThan5 = compare(5,"lt")
+   * isLessThan5: Int => Boolean = <function1>
+   *
+   * scala> val input = List(1,2,3,4,5,6,7,8)
+   * input: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8)
+   *
+   * scala> input filter (isLessThan5(_))
+   * res24: List[Int] = List(1, 2, 3, 4)
+   *
+   * scala> val format = new java.text.SimpleDateFormat("dd-MM-yyyy")
+   * format: java.text.SimpleDateFormat = java.text.SimpleDateFormat@9586200
+   * 
+   * scala> val input = List(format.parse("21-03-2011"),format.parse("23-02-1911"),format.parse("21-04-2011"),format.parse("01-05-2011"))
+   * input: List[java.util.Date] = List(Mon Mar 21 00:00:00 IST 2011, Thu Feb 23 00:00:00 IST 1911, Thu Apr 21 00:00:00 IST 2011, Sun May 01 00:00:00 IST 2011)
+   *
+   * scala> input filter (compare(format.parse("21-03-2011"), "gt")(_))
+   * res28: List[java.util.Date] = List(Thu Apr 21 00:00:00 IST 2011, Sun May 01 00:00:00 IST 2011)
+   *
+   * @param value: That is to be compared.
+   * @param condition: Matching condition. Matching condition could be any of "lt","lte","gt","gte" or "eq". 
+   * If there is no condition, default condition is "eq".
+   * @return [dataType]=> Boolean = <function1>
+   */
+  def compare[A](value: A, condition: String = "eq")(implicit ord: Ordering[A]) = {
+    ((condition.equals("lt")), (condition.equals("lte")),
+      (condition.equals("gt")), (condition.equals("gte")),
+      (condition.equals("eq"))) match {
+        case (true, false, false, false, false) => ((ord.lt _).curried)(_: A)(value)
+        case (false, true, false, false, false) => ((ord.lteq _).curried)(_: A)(value)
+        case (false, false, true, false, false) => ((ord.gt _).curried)(_: A)(value)
+        case (false, false, false, true, false) => ((ord.gteq _).curried)(_: A)(value)
+        case (_, _, _, _, _) => ((ord.equiv _).curried)(_: A)(value)
+      }
   }
 
 }
