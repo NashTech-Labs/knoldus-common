@@ -8,6 +8,7 @@ scalaVersion := "2.11.2"
 
 libraryDependencies ++= Seq("org.apache.pdfbox" % "pdfbox" % "1.8.4",
                             "org.apache.pdfbox" % "fontbox" % "1.8.4",
+                            "org.apache.poi" % "poi-scratchpad" % "3.10.1",
                             "org.scalatest" %% 	"scalatest" % "2.2.2" % "test")
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
