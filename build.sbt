@@ -18,6 +18,10 @@ resolvers += "Scala-tools" at "https://oss.sonatype.org/content/groups/scala-too
 
 resolvers += "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots"
 
+seq(ScctPlugin.instrumentSettings : _*)
+
+
+
 
 
 
